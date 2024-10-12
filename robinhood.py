@@ -8,6 +8,7 @@ import os
 import json
 import time
 
+# Sends me whatever message is passed
 def processMessage(msg):
   server = smtplib.SMTP("smtp.gmail.com", 587)
   server.starttls()
@@ -15,6 +16,7 @@ def processMessage(msg):
   server.send_message(msg)
   server.quit()
 
+# Emails me an alert
 def email_alert(positive_change):
   msg = EmailMessage()
   msg['to']   = os.getenv("EMAIL")
@@ -30,16 +32,20 @@ def email_alert(positive_change):
   # Sends the email from the smtp server
   processMessage(msg)
 
+# Gets the last_sold_price from quotes given a stock
 def getLastPrice(quotes, stock):
   for item in quotes:
     if item['symbol'] == stock['symbol']:
       return float(item['last_trade_price'])
 
+# Prints the good stuff
 def show(table, equity, profit):
   print(table)
   print(f"\nPortfolio Value: ${round(equity, 2)}")
   print(f"Profit Value:    ${round(profit, 2)}")
 
+# Checks to see if there is an increase in portfolio value 
+# and sends the appropriate message accordingly
 def handleEquity(old, new):
   if((old < new) and (old != 0)):
     email_alert(positive_change=True)
@@ -47,6 +53,7 @@ def handleEquity(old, new):
   if((old > new) and (old != 0)):
     email_alert(positive_change=False)
 
+# Checks to see if it is 6am, 12pm, 6pm, or 12am
 def validTime():
   if((time.localtime().tm_hour == 6 and time.localtime().tm_min == 0) or
        (time.localtime().tm_hour == 12 and time.localtime().tm_min == 0) or
