@@ -1,0 +1,1 @@
+The end goal is to have a dashboard using multiple financial apis and create analytics, update in real time, and store them somewhere. idk yet

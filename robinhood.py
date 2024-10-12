@@ -116,7 +116,7 @@ def main():
       # Skip a minute so that we don't run it twice on the same interval
       time.sleep(60)
 
-    # Skips 6 hours - should work but might now
+    # Skips 6 hours - should work but might not
     time.sleep(60 * 60 * 6)
 
 if __name__ == "__main__":
