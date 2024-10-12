@@ -41,7 +41,6 @@ def show(table, equity, profit):
   print(f"Profit Value:    ${round(profit, 2)}")
 
 def handleEquity(old, new):
-  email_alert(positive_change=True)
   if((old < new) and (old != 0)):
     email_alert(positive_change=True)
 
